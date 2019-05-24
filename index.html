@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>恒拓高科--客户端导航</title>
+    <link rel="shortcut icon" href="favcion.ico" />
+    <link rel="stylesheet" href=" css/iconfont.css">
+    <link rel="stylesheet" href="../plug-in/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container" id="container">
+        <aside class="left-bar" id="leftBar">
+            <div class="title">
+            </div>
+            <nav class="nav">
+                <div class="item active"><a href=""><i class="iconfont icon-daohang2"></i>导航</a><i class="line"></i></div>
+                <ul class="nav-item" id="navItem">
+                    <li><a href="#bbs" class="active"><i class="iconfont icon-shequ"></i>持续构建服务</a></li>
+                    <li><a href="#sill"><i class="iconfont icon-blogger"></i>Sonar质量管理</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="main">
+            <div id="mainContent">
+                <!-- 手机端菜单 -->
+                <div id="menu-box">
+                   <div id="menu">
+                       <input type="checkbox" id="menu-form">
+                       <label for="menu-form" class="menu-spin">
+                        <div class="line diagonal line-1"></div>
+                        <div class="line horizontal"></div>
+                        <div class="line diagonal line-2"></div>
+                      </label>
+                    </div>
+                </div>
+                <!-- 开发社区 -->
+                <div class="box">
+                    <a href="#" name="bbs"></a>
+                    <div class="sub-category">
+                        <div><i class="iconfont icon-shequ"></i>持续构建</div>
+                    </div>
+                    <div>
+                        <a target="_blank" href="http://ci.workplus.ml:9081/ci/">
+                            <div class="item">
+                                <div class="logo"><img src="img/isux-favicon.jpg" alt="CNDS">持续构建</div>
+                                <div class="desc">快速构建iOS,Android包等</div>
+                            </div>
+                        </a>
+                            <a target="_blank" href="http://ci_docs.workplus.ml/">
+                            <div class="item">
+                                <div class="logo"><img src="img/isux-favicon.jpg" alt="CNDS">构建指引</div>
+                                <div class="desc">学习如何构建吧</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- 技术博客 -->
+                <div class="box">
+                    <a href="#" name="sill"></a>
+                    <div class="sub-category">
+                        <div><i class="iconfont icon-blogger"></i>质量管理</div>
+                    </div>
+                    <div>
+                         <a target="_blank" href="http://ci.workplus.ml:9081/sonar/">
+                            <div class="item">
+                                <div class="logo"><img src="img/isux-favicon.jpg" alt="CNDS">Sonar质量管理平台</div>
+                                <div class="desc">评估代码质量</div>
+                            </div>
+                        </a>
+                        
+                        <a target="_blank" href="http://ci_docs.workplus.ml/sonar/ios.html">
+                            <div class="item">
+                                <div class="logo"><img src="img/isux-favicon.jpg" alt="CNDS">IOS SONAR环境搭建</div>
+                                <div class="desc">在OSX平台上支持OC及Swift的分析</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </section>
+        <script src="js/jquery.js"></script>
+        <script>
+        var oMenu = document.getElementById('menu');
+        var oLeftBar = document.getElementById('leftBar');
+        var menuFrom = document.getElementById('menu-form');
+
+        oMenu.onclick = function() {
+            if (oLeftBar.offsetLeft == 0) {
+                oLeftBar.style.left = -249 + 'px';
+            }
+            else {
+                oLeftBar.style.left = 0;
+            }
+        }
+
+
+        // 监听页面宽度变化
+        window.onresize = function() {
+            judgeWidth();
+            // console.log(document.documentElement.clientWidth);
+        };
+
+        // 判断页面宽度
+        function judgeWidth() {
+            if (document.documentElement.clientWidth > 481) {
+                oLeftBar.style.left = 0;
+            } else {
+                oLeftBar.style.left = -249 + 'px';
+            }
+        }
+
+
+        var oNavItem = document.getElementById('navItem');
+        var aA = oNavItem.getElementsByTagName('a');
+        for (var i = 0; i < aA.length; i++) {
+            aA[i].onclick = function() {
+                for (var j = 0; j < aA.length; j++) {
+                    aA[j].className = '';
+                }
+                this.className = 'active';
+                if (oLeftBar.offsetLeft == 0) {
+                    if (document.documentElement.clientWidth <= 481) {
+                        oLeftBar.style.left = -249 + 'px';
+                        menuFrom.checked = false;
+
+                    }
+                }
+            }
+        }
+
+
+        $(window).scroll(function() {
+            if($(window).scrollTop() >= 200){
+                $('#fixedBar').fadeIn(300);
+            }else{
+                $('#fixedBar').fadeOut(300);
+            }
+        });
+        $('#fixedBar').click(function() {
+            $('html,body').animate({scrollTop:'0px'},800);
+        })
+        </script>
+</body>
+
+</html>
